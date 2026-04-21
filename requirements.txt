@@ -1,0 +1,5 @@
+# Requirements for viral-video-script
+# Python 3.8+
+
+# No external dependencies required for core functionality
+# All modules use only Python standard library

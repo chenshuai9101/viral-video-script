@@ -1,0 +1,26 @@
+# 短视频爆款文案生成器
+v1.0
+
+## 概述
+为自媒体创作者提供爆款短视频脚本生成服务的Python工具包
+
+## 安装依赖
+pip install -r requirements.txt
+
+## 快速开始
+```python
+from scripts.generator import ScriptGenerator
+gen = ScriptGenerator()
+result = gen.generate_script(topic="职场技巧", platform="douyin", style="干货", duration="30s")
+print(result)
+```
+
+## 功能
+- 支持抖音、小红书、快手三大平台
+- 100+爆款标题模板
+- 50+开头钩子模板
+- 20+内容结构模板
+- 自动生成标签和分镜描述
+
+## 许可证
+MIT License
