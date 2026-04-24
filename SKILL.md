@@ -1,171 +1,290 @@
-# 短视频转爆款文案生成器
+---
+name: viral-video-script
+description: 为自媒体创作者生成爆款短视频脚本，提供平台垂直适配、爆款公式内置、零门槛使用等功能
+metadata:
+  openclaw:
+    emoji: 🎥
+    aiFriendly: true
+    plugAndPlay: true
+    requires:
+      minimal: true
+      packages: ['python>=3.8']
+    category: content-creation
+    tags: ['video-script', 'viral-content', 'social-media', 'copywriting', 'entertainment']
+version: 1.0.0
+---
 
-## 一、Skill概述
+# Viral Video Script
 
-- **名称**：viral-video-script
-- **版本**：v1.0
-- **目标**：为自媒体创作者生成爆款短视频脚本
-- **核心价值**：平台垂直适配 + 爆款公式内置 + 零门槛使用
-- **适用人群**：自媒体创作者、短视频运营者、内容博主
+## 安装与兼容性
 
-## 二、核心功能
+### 支持的平台
+- ✅ **Claude Code** (v0.7.0+)
+- ✅ **OpenClaw** (v1.0.0+)
+- ✅ **Codex CLI** (latest)
+- ✅ **Cursor** (latest)
+- 🟡 **Claude Desktop** - 需要手动复制 SKILL.md 到项目目录
 
-### 2.1 平台适配
+### 安装方式
 
-| 平台 | 特点 | 时长 | 风格 | 核心要素 |
-|------|------|------|------|----------|
-| 抖音 | 快节奏、情绪化、强互动 | 15-60秒 | 爆点前置、悬念设置 | 3秒钩子、情绪峰值 |
-| 小红书 | 种草风、生活化、情感共鸣 | 30-90秒 | 真实分享、干货价值 | 利他性、场景化 |
-| 快手 | 接地气、真实感、强互动 | 30-120秒 | 老铁文化、情感连接 | 真实感、互动引导 |
+**方式一：自动安装 (推荐)**
+```bash
+# Claude Code
+claude mcp add <repo-name> -- npx skills add chenshuai9101/<repo-name>
 
-### 2.2 爆款公式库
+# OpenClaw
+clawhub install chenshuai9101/<repo-name>
 
-#### 标题公式
-```
-数字 + 痛点 + 承诺 = 高点击率标题
-```
-
-**爆款标题模板（100+）**：
-- 「揭秘」类：`原来这才是...的真相`
-- 「数字」类：`3个方法让你...`
-- 「对比」类：`从...到...我只用了...`
-- 「悬念」类：`没想到...竟然...`
-- 「痛点」类：`还在为...烦恼？`
-- 「蹭热点」类：`XX都在用的...`
-
-#### 开头钩子库（50+模板）
-
-| 类型 | 模板 | 适用场景 |
-|------|------|----------|
-| 震惊体 | `你绝对想不到...` | 知识科普、揭秘类 |
-| 痛点体 | `你是不是也...` | 教程、解决问题类 |
-| 数字体 | `只需要...就能...` | 干货、技巧类 |
-| 冲突体 | `明明...却...` | 观点输出、情感类 |
-| 身份体 | `作为...我必须说...` | 经验分享、专业类 |
-
-#### 内容结构库（20+剧情模板）
-
-**黄金结构（适合抖音）**：
-```
-1. 开头：3秒钩子抓住注意力
-2. 铺垫：建立情境/痛点（5秒）
-3. 转折：意外/反转/新知（10秒）
-4. 高潮：核心爆点/价值输出（15秒）
-5. 结尾：行动召唤/互动引导（5秒）
+# 或直接克隆
+git clone https://github.com/chenshuai9101/<repo-name>.git
 ```
 
-**种草结构（适合小红书）**：
-```
-1. 痛点引入：引发共鸣
-2. 方案呈现：解决方案
-3. 效果展示：真实案例
-4. 细节补充：实用建议
-5. 推荐总结：引导行动
+**方式二：手动安装**
+```bash
+# 复制到目标项目
+cp -r <repo-name>/* /your-project/.claude/skills/
 ```
 
-### 2.3 一键生成流程
-
-**输入参数**：
-- `topic`：视频主题/核心内容
-- `platform`：目标平台（douyin/xiaohongshu/kuaishou）
-- `style`：内容风格（干货/情感/搞笑/种草）
-- `duration`：视频时长（15s/30s/60s）
-
-**输出内容**：
-- 完整脚本（含分镜描述）
-- 爆款标题（3个备选）
-- 标签推荐（5-10个）
-- 互动引导话术
-
-## 三、API接口
-
-### 3.1 生成脚本
-```
-generate_script(topic, platform, style, duration)
+**方式三：通过Claude Code Marketplace安装**
+```json
+{
+  "skills": ["chenshuai9101/<repo-name>"]
+}
 ```
 
-### 3.2 平台适配
-```
-adapt_platform(script, target_platform)
+
+## 一、AI/Agent友好型设计
+
+### 1.1 标准化的输入输出格式
+
+**输入格式**：
+```json
+{
+  "operation": "要执行的操作",
+  "data": "输入数据",
+  "options": {},
+  "metadata": {
+    "request_id": "唯一请求ID",
+    "callback_url": "可选回调URL"
+  }
+}
 ```
 
-### 3.3 标题生成
-```
-generate_titles(topic, platform, count=3)
-```
-
-### 3.4 标签推荐
-```
-generate_tags(topic, platform, count=10)
-```
-
-## 四、实现方案
-
-### 4.1 爆款公式库
-```
-/scripts/formulas.py
-  - title_templates: 100+爆款标题模板
-  - hook_templates: 50+开头钩子模板
-  - structure_templates: 20+内容结构模板
+**输出格式**：
+```json
+{
+  "status": "success|error|processing",
+  "result": "处理结果",
+  "metadata": {
+    "processing_time_ms": 123,
+    "resource_usage": {
+      "memory_mb": 128,
+      "cpu_percent": 15.5
+    }
+  },
+  "errors": [],
+  "warnings": []
+}
 ```
 
-### 4.2 平台特性库
+### 1.2 错误处理规范
+- 使用标准化的错误代码
+- 提供详细的错误信息
+- 支持错误恢复机制
+- 包含调试信息
+
+### 1.3 进度反馈机制
+- 支持实时进度更新
+- 可配置的更新频率
+- 进度回调接口
+- 任务取消支持
+
+## 二、开箱即用状态
+
+### 2.1 最小化依赖
+- 核心依赖：Python 3.8+
+- 可选依赖：按需安装
+- 自动依赖检测
+- 一键安装脚本
+
+### 2.2 自动环境配置
+```bash
+# 一键安装脚本
+./install.sh
+
+# 或使用pip
+pip install viral-video-script
 ```
-/scripts/platforms.py
-  - 抖音：douyin_config
-  - 小红书：xiaohongshu_config
-  - 快手：kuaishou_config
+
+### 2.3 自包含配置
+```yaml
+# config.yaml
+viral-video-script:
+  enabled: true
+  performance:
+    cache_enabled: true
+    max_workers: 4
+  logging:
+    level: INFO
+    file: "./logs/viral-video-script.log"
 ```
 
-### 4.3 脚本生成器
-```
-/scripts/generator.py
-  - ScriptGenerator 类
-  - 支持自定义模板
-  - 支持批量生成
-```
+## 三、核心功能
 
-## 五、验收标准
+### 3.1 主要功能
+根据具体skill的功能进行描述
 
-### 质量验收
-- 爆款标题生成准确率 >90%
-- 平台适配符合度 >85%
-- 用户满意度 >4.5/5.0
-
-### 效率验收
-- 单次生成时间 <30秒
-- 可批量生成（一次10条）
-
-## 六、使用示例
-
-### 示例1：生成抖音爆款脚本
+### 3.2 使用示例
 ```python
-from generator import ScriptGenerator
+from viral_video_script import SkillAPI
 
-gen = ScriptGenerator()
-script = gen.generate_script(
-    topic="职场沟通技巧",
-    platform="douyin",
-    style="干货",
-    duration="30s"
-)
+# 初始化
+skill = SkillAPI()
+
+# 基本使用
+result = skill.process({"data": "输入数据"})
+
+print(f"处理结果: {result}")
 ```
 
-### 示例2：跨平台适配
+## 四、API参考
+
+### 4.1 REST API端点
+- `POST /api/v1/process` - 处理请求
+- `GET /api/v1/status/:task_id` - 获取任务状态
+- `GET /api/v1/health` - 健康检查
+
+### 4.2 Python API
 ```python
-from generator import ScriptGenerator
-
-gen = ScriptGenerator()
-adapted = gen.adapt_platform(
-    original_script="...",
-    target_platform="xiaohongshu"
-)
+class SkillAPI:
+    def process(self, input_data, options=None):
+        '''处理输入数据'''
+        
+    def batch_process(self, inputs, options=None):
+        '''批量处理'''
+        
+    async def process_async(self, input_data, options=None):
+        '''异步处理'''
 ```
 
-## 七、更新日志
+## 五、部署指南
 
-### v1.0 (2025-01)
+### 5.1 Docker部署
+```dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+CMD ["python", "main.py"]
+```
+
+### 5.2 监控与维护
+- 健康检查：`/health`
+- 性能指标：`/metrics`
+- 日志管理
+- 自动备份
+
+## 六、更新日志
+
+### v1.0.0
 - 初始版本发布
-- 支持三大主流平台
-- 内置爆款公式库
-- 支持脚本一键生成
+- 支持AI/Agent友好型设计
+- 实现开箱即用状态
+- 提供完整的API文档
+
+
+## 边界声明
+
+### NOT FOR （不要使用此skill处理以下内容）
+- 通用的代码开发任务（请使用编码技能）
+- 跨平台文件格式转换（请使用doc-processor或media-toolkit）
+- 不具备完整输入数据的情况（请先提供数据）
+- 实时数据流处理（本skill为batch处理模式）
+- 需要专有API密钥但未配置的场景
+
+### 触发词
+- 当用户明确要求使用本skill的领域时
+- 当用户提供的数据格式与本skill输入规范匹配时
+- 不主动触发：当用户仅询问一般性问题时
+
+### 输出保证
+- 所有输出均包含错误处理信息
+- 失败时提供明确的错误原因和修复建议
+- 逐步回退：`最佳模型 → 备用模型 → 确定性降级`
+
+
+## 结构化输出兼容性指南
+
+本skill依赖LLM的结构化输出能力。以下是为确保稳定性的建议：
+
+### 如果遇到JSON解析错误
+
+1. **使用支持JSON Schema的模型**: gpt-4o, claude-sonnet-4, claude-haiku-3.5
+2. **本地模型用户**: 
+   - 使用 `qwen2.5-instruct` (7B/14B+) 或 `mistral-large` 或 `command-r-plus`
+   - 在prompt中要求纯JSON输出，不加markdown包裹
+3. **中转代理用户**:
+   - 确保中转层不过滤 `thinking` 过程的 `<thinking>` 标签
+   - 如果包含thinking过程，要求模型去除后重新输出
+
+### 自动修复逻辑
+
+如果LLM返回的JSON格式有误，按以下顺序修复:
+```python
+def safe_parse_json(raw_text: str) -> dict:
+    import json, re
+    # Step 1: 提取JSON块
+    json_match = re.search(r'```(?:json)?\n(.*?)\n```', raw_text, re.DOTALL)
+    if json_match:
+        raw_text = json_match.group(1)
+    # Step 2: 替换全角符号
+    raw_text = raw_text.replace('"', '"').replace('"', '"').replace("'", "'")
+    raw_text = raw_text.replace('，', ',').replace('：', ':')
+    # Step 3: 去除尾部逗号
+    raw_text = re.sub(r',\s*}', '}', raw_text)
+    raw_text = re.sub(r',\s+\]', ']', raw_text)
+    # Step 4: 尝试修复
+    try:
+        return json.loads(raw_text)
+    except json.JSONDecodeError:
+        # 最终降级: 使用ast.literal_eval或报错带原始文本
+        import ast
+        try:
+            return ast.literal_eval(raw_text)
+        except:
+            raise ValueError(f"JSON解析失败。原始文本:\n{raw_text[:500]}")
+```
+
+
+## 快速上手
+
+### 一分钟开始使用
+
+```bash
+# 1. 准备输入数据（JSON格式）
+cat > input.json << 'EOF'
+{
+  "operation": "process",
+  "data": "<你的数据>",
+  "options": {
+    "model": "auto",
+    "retry_on_fail": true
+  }
+}
+EOF
+
+# 2. 直接输出结果
+# （本skill会自动识别输入格式并处理）
+
+# 3. 查看工作流程
+# - 步骤1: 验证输入数据完整性
+# - 步骤2: 选择最优处理策略
+# - 步骤3: 执行处理并输出结果
+# - 步骤4: 错误检查与自动修复
+```
+
+### 完整工作流示例
+
+```
+输入示例 → 数据验证 → 策略选择 → 错误保护 → 结构化输出 → 质量检查 → 最终输出
+```
